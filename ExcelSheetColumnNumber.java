@@ -11,5 +11,5 @@ public class ExcelSheetColumnNumber {
         	n += num;
         }
         return n;
-    }	
+    }
 }

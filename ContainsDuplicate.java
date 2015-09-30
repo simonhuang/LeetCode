@@ -7,11 +7,11 @@ public class ContainsDuplicate {
         
         for (int i=0;i<nums.length;i++){
         	if (set.contains(nums[i])){
-        		return false;
+        		return true;
         	} else {
         		set.add(nums[i]);
         	}
         }
-        return true;
+        return false;
     }
 }
