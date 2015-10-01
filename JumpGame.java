@@ -2,37 +2,35 @@ package leetCode;
 import java.util.*;
 public class JumpGame {
 	public static void main (String [] args){
-		int a[] = {2,0,0};
-		System.out.println(canJump(a));
+		int a[] = {2,3,1,1,1,4};
+		System.out.println(jump(a));
 	}
-	 public static boolean canJump(int[] A) {
-        int index = A.length - 2;
+    public static boolean canJump(int[] nums) {
+        boolean reachable [] = new boolean [nums.length];
         
-        if (A[0] == 0){
-        	if (A.length == 1){
-        		return true;
-        	} else {
-        		return false;
-        	}
-        }
+        reachable[0] = true;
         
-        int cur_dead_index = -1;
-        while (index >= 0){
-        	if (A[index] == 0 && cur_dead_index == -1){
-        		cur_dead_index = index;
-        		index --;
-        	} else if (cur_dead_index != -1) {
-        		if (index + A[index] > cur_dead_index){
-        			cur_dead_index = -1;
-        		}
-    			index --;
-        	} else {
-        		index --;
-        	}
+        for (int i=0;i<nums.length-1;i++){
+            int index = i + nums[i] > nums.length - 1 ? nums.length - 1 : i + nums[i];
+            while (!reachable[index]){
+                reachable[index] = true;
+                index --;
+            }
         }
-        if (cur_dead_index == -1){
-        	return true;
-        }
-        return false;
+        return reachable[nums.length - 1];
+    }
+	 public static int jump(int[] n) {
+		 int reach = 0;
+		 int last_reach = 0;
+		 int count = 0;
+		 while (reach < n.length-1){
+			 int start = last_reach;
+			 last_reach = reach;
+			 for (int i=start;i<last_reach+1;i++){
+				 if (n[i] + i > reach) reach = n[i] + i;
+			 }
+			 count ++;
+		 }
+		 return count;
     }
 }
