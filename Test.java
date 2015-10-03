@@ -1,23 +1,39 @@
 package leetCode;
-
-import leetCode.DeleteNodeInALinkedList.ListNode;
+import java.util.*;
 
 public class Test {
-	public static void main (String [] args){
-		int [] n = {1, 2, 3, 4, 8, 3, 9, 1, 13, 10};
-		System.out.println(second_largest(n));
-	}
-	static int second_largest(int []n){
-		int largest = Integer.MIN_VALUE;
-		int second = Integer.MIN_VALUE;
-		for (int i=0;i<n.length;i++){
-			if (n[i] > largest){
-				second = largest;
-				largest = n[i];
-			} else if (n[i] > second){
-				second = n[i];
-			}
+	class Node{
+		int value;
+		int weight;
+		public Node (int value, int weight){
+			this.value = value;
+			this.weight = weight;
 		}
-		return second;
+		
+		public String toString(){
+			return this.value + " " + this.weight;
+		}
+		public int hashCode(){
+			return this.weight * 31 + this.value;
+		}
+		public boolean equals(Object o){
+			if (! (o instanceof Node)){
+				return false;
+			} else if (o == this){
+				return true;
+			}
+			Node n = (Node) o;
+			return this.value == n.value && this.weight == n.weight;
+		}
+	}
+	public static void main (String [] args){
+		Test t = new Test();
+		Set<Node> set = new HashSet<Node>();
+		List<Integer> l1 = new ArrayList<Integer>();
+		Node n = t.new Node(3, 5);
+		Node n2 = t.new Node(3, 5);
+		set.add(n);
+		set.add(n2);
+		System.out.println(set);
 	}
 }
