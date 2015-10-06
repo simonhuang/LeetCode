@@ -36,6 +36,7 @@ public class MergeNLists {
 		int val;
 		ListNode next;
 		ListNode (int x) { val = x; }
+		void gg () {};
 	}
 	static class NodeEntry implements Comparable<NodeEntry>{
 		ListNode node;
