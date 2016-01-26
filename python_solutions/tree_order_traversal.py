@@ -1,57 +1,38 @@
-from collections import deque
-class Tree(object):
-    def __init__(self, x, left = None, right = None):
-        self.val = x
-        self.left = left
-        self.right = right
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
 class Solution(object):
-    def levelOrderBottom(self, root):
+    def levelOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        queue = []
+        if root is None:
+            return []
+
+        tree_level = [root]
         next_level = []
 
-        if root is None:
-        	return []
+        num_level = []
+        levels = []
 
-        in_order_list = []
+        while tree_level:
+            node = tree_level.pop(0)
+            num_level.append(node.val)
 
-        queue.append(root)
+            if node.left is not None:
+                next_level.append(node.left)
+            if node.right is not None:
+                next_level.append(node.right)
 
-
-        while True:
-        	cur_level = []
-        	while queue:
-        		node = queue.pop(0)
-        		print node
-        		cur_level.append(node.val)
-        		if node.left is not None:
-        			next_level.append(node.left)
-        		if node.right is not None:
-        			next_level.append(node.right)
-        	print cur_level
-        	in_order_list.append(cur_level)
-        	if not next_level:
-        		break
-        	queue = next_level
-        	next_level = []
-        in_order_list.reverse()
-        return in_order_list
-
-t0 = Tree(4)
-t1 = Tree(5)
-t2 = Tree(2, t0, t1)
-
-t3 = Tree(6)
-t4 = Tree(7)
-t5 = Tree(3, t3, t4)
-
-tree = Tree(1, t2, t5)
-
-s = Solution()
-s.levelOrderBottom(tree)
-
-        
+            if not tree_level:
+                tree_level = next_level
+                next_level = []
+                levels.append(num_level)
+                num_level = []
+        return levels
